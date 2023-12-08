@@ -25,26 +25,25 @@
 <div class="container">
 
 
+    <div class="row">
+      <div class="col-md-12">
+        <?php include 'entete.html';?>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-md-12">
-<?php include 'entete.html';?>
+    <div class="row">
+
+
+
+      <div class="col-md-8">carroussel</div>
+
+  <div class="col-md-4">
+  <?php include 'authentification.php';?>
   </div>
-</div>
-
-<div class="row">
 
 
 
-<div class="col-md-8">carroussel</div>
-
-<div class="col-md-4">
-<?php include 'authentification.php';?>
-</div>
-
-
-
-</div>
+  </div>
 
 
 </div>
