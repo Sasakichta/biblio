@@ -1,28 +1,20 @@
 <div class="container pt-5">
     <div class="d-flex justify-content-center">
-        <span class="border border-5 border-dark">
+        <div class="border border-5 border-dark p-4">
             <form name="nameForm" method="post" action="traitement.php">
-                Se connecter 
-                <br>
-                <br>
-                Identifiant 
-                <br>
-                
-                <input type="text" name="nom"> 
-                <br>
-                <br>
-                Mot de passe 
-                <br>
-                
-                <input type="text" name="prenom">
-                <br>
-                <br>
-                <input type="submit" value="Connexion">
+                <h2 class="text-center mb-4">Se connecter</h2>
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Identifiant</label>
+                    <input type="text" class="form-control" id="nom" name="nom">
+                </div>
+                <div class="mb-3">
+                    <label for="prenom" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="prenom" name="prenom">
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Connexion</button>
+                </div>
             </form>
-        </span>
+        </div>
     </div>
 </div>
-
-<?php
- echo "vide temporairement"
-?>
