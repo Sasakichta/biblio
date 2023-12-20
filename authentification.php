@@ -5,11 +5,11 @@
                 <h2 class="text-center mb-4">Se connecter</h2>
                 <div class="mb-3">
                     <label for="nom" class="form-label">Identifiant</label>
-                    <input type="text" class="form-control" id="nom" name="nom">
+                    <input type="text" class="form-control" id="id" name="id">
                 </div>
                 <div class="mb-3">
                     <label for="prenom" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control" id="prenom" name="prenom">
+                    <input type="password" class="form-control" id="mdp" name="mdp">
                 </div>
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary" type="submit">Connexion</button>
