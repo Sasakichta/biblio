@@ -1,3 +1,15 @@
+<?php 
+require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
+?>
+
+
+
+
+
+
+
+
+
 <div class="container-fluid mt-3">
   <h3 class="text-center mb-1">⬇️ Derniers ajouts ⬇️</h3>
   <p class="text-center mb-1">Ci-dessus un apperçu de nos 2 dernières aquisitions.</p>
