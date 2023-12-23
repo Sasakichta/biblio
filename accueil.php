@@ -39,18 +39,25 @@
         </div>
 
 
+        
     </div>
 
 
     <div class="row">
-          <div class="col-md-8">
-            <?php include 'carroussel.php';?>
+
+    <div class="col-md-3"></div>
+
+          <div class="col-md-5">
+            <div class="card;border-0"  style="width:550px;height:150px"> <!-- card pour empecher le carroussel d'être trop gros et l'afficher dans une zone determinée  /  border 0 pour enlever le border de la card -->
+              <?php include 'carroussel.php';?>
+            </div>
           </div>
 
           <div class="col-md-4">
             <?php include 'authentification.php';?>
           </div>
     </div>
+    <div class="row"></div>
 
 
 

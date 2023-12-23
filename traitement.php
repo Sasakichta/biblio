@@ -42,8 +42,6 @@ $select = $connexion->prepare("SELECT * FROM livre");
  echo "<img src='".$varImage."'class='imgPos' alt='Image'>";
 }
 
-echo $varImage;
-
 
 
 
