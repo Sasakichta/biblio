@@ -29,7 +29,7 @@ $compteur=0;
 
 echo ('<div class="container-fluid mt-3">
   <h3 class="text-center mb-1">⬇️ Derniers ajouts ⬇️</h3>
-  <p class="text-center mb-1">Ci-dessus un apperçu de nos 2 dernières aquisitions.</p>
+  <p class="text-center mb-1">Ci-dessous un apperçu de nos 2 dernières aquisitions.</p>
     <br>
 </div>');
 

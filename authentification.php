@@ -5,7 +5,7 @@
                 <h2 class="text-center mb-4">Se connecter</h2>
                 <div class="mb-3">
                     <label for="nom" class="form-label">Identifiant</label>
-                    <input type="text" class="form-control" id="id" name="id">
+                    <input type="text" class="form-control" id="id" name="id" placeholder="Saisissez votre e@mail">
                 </div>
                 <div class="mb-3">
                     <label for="prenom" class="form-label">Mot de passe</label>
