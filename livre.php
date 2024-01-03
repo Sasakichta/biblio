@@ -48,9 +48,9 @@
     <div class="col-md-3"></div>
 
           <div class="col-md-5">
-            <div class="card;border-0"  style="width:375px;height:150px"> <!-- card pour empecher le carroussel d'être trop gros et l'afficher dans une zone determinée  /  border 0 pour enlever le border de la card -->
+            
               <?php include 'rechercher.php';?>
-            </div>
+            
           </div>
 
           <div class="col-md-4">
