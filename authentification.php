@@ -1,7 +1,7 @@
 <div class="container pt-5">
     <div class="d-flex justify-content-center">
         <div class="border border-5 border-dark p-4">
-            <form name="nameForm" method="post" action="traitement.php">
+            <form name="connexion" method="post" action="traitement.php">
                 <h2 class="text-center mb-4">Se connecter</h2>
                 <div class="mb-3">
                     <label for="nom" class="form-label">Identifiant</label>

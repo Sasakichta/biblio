@@ -51,7 +51,7 @@ $select = $connexion->prepare("SELECT * FROM livre INNER JOIN auteur ON (livre.n
  while ($enregistrement = $select->fetch()){
   
  //echo $enregistrement->titre." "."($enregistrement->anneeparution)<br><br>";
- echo "<a href='livre.php'>".$enregistrement->titre." "."($enregistrement->anneeparution)<br><br>"."</a>";
+ echo "<a href='livre.php?idLivre=".$enregistrement->nolivre."'>".$enregistrement->titre." "."($enregistrement->anneeparution)<br><br>"."</a>";
 }
 
 ?>

@@ -49,7 +49,32 @@
 
           <div class="col-md-5">
             
-              <?php include 'rechercher.php';?>
+          <?php 
+
+// Commentaire sur une ligne
+
+/*
+Sur Plusieurs lignes
+*/
+
+
+
+
+// On se  connecte, voir code du fichier connexion.php ci-dessus
+require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
+
+// $select = $connexion->prepare("SELECT * FROM action where numeroActivite=:codeActivite");
+$select = $connexion->prepare("SELECT * FROM livre where nolivre=:id");
+
+  $select->bindValue(":id", $_GET['idLivre']);
+  $select->setFetchMode(PDO::FETCH_OBJ);
+  $select->execute();
+
+ while ($enregistrement = $select->fetch()){
+ //echo $enregistrement->titre." "."($enregistrement->anneeparution)<br><br>";
+ echo $enregistrement->resume;
+}
+?>
             
           </div>
 
