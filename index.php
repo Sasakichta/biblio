@@ -47,16 +47,8 @@
 
 
 
-if (isset($_SESSION['start']))
-{
-  echo "test (session est start) :";
-  echo $_SESSION["profil"]."test";}
-else {
-  echo "test (session pas start)";
-session_start();
-$_SESSION["start"] = True;
 
-}
+session_start();
 
 
 
@@ -91,30 +83,8 @@ $_SESSION["start"] = True;
 
           <div class="col-md-4">
           
-            <?php 
-echo $_SESSION['utilisateur'];
-
-              if (isset($_SESSION['profil']))
-              
-              {
-               // si l'utilisateur est connecté, alors afficher "bonjour @user" 
-                  if (($_SESSION['profil']) == 'Membre')
-                  {
-                      //l'afficher en tant que membre
-                      echo "membre";
-                  }
-                  elseif (($_SESSION['profil']) == 'Administrateur') {
-                      //l'afficher en tant qu'admin
-                      echo "admin";
-                  }
-              }
-
-              else {
-                echo "pas co";
-                echo $_SESSION['profil'];
-                include 'authentification.php';
-              }
-            
+            <?php              
+                include 'authentification.php';       
             ?>
           </div>
     </div>

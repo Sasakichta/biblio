@@ -64,7 +64,7 @@ Sur Plusieurs lignes
 require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
 
 // $select = $connexion->prepare("SELECT * FROM action where numeroActivite=:codeActivite");
-$select = $connexion->prepare("SELECT * FROM livre where nolivre=:id");
+$select = $connexion->prepare("SELECT * FROM livre INNER JOIN auteur ON (livre.noauteur = auteur.noauteur) where nolivre=:id");
 
   $select->bindValue(":id", $_GET['idLivre']);
   $select->setFetchMode(PDO::FETCH_OBJ);
@@ -72,7 +72,17 @@ $select = $connexion->prepare("SELECT * FROM livre where nolivre=:id");
 
  while ($enregistrement = $select->fetch()){
  //echo $enregistrement->titre." "."($enregistrement->anneeparution)<br><br>";
+ echo "Auteur : ".$enregistrement->nom." ".$enregistrement->prenom;
+ echo "<br>";
+ echo "<br>";
+ echo "ISBN13 : ".$enregistrement->isbn13;
+ echo "<br>";
+ echo "<br>";
+ echo "Résumé du livre : <br>";
  echo $enregistrement->resume;
+ echo "<br>";
+ echo "<img src=".$enregistrement->image.' alt=Chicago'.'class=d-block>';
+
 }
 ?>
             
