@@ -50,7 +50,7 @@
 
 
               <?php 
-              if (isset($_SESSION['profil']))
+              if ($_SESSION['profil'] == )
               
               {
                     echo "Votre panier";
