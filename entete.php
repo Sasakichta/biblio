@@ -11,8 +11,8 @@
       <div class="container-fluid rounded">
           <form class="d-flex w-100" method="post" action="Affichagerecherche.php">
               <input class="form-control me-2 flex-grow-1" type="text" placeholder="Rechercher dans le catalogue (Saisie du nom de l'auteur)" name="recherche">
-              <button class="btn btn-primary" type="submit">Search</button>
-          </form>
+            </form>
+             <a href="panier.php" class="btn btn-primary">Panier</a>
       </div>
   </nav>
 </div>

@@ -60,7 +60,7 @@ session_start();
 
     <div class="row">
         <div class="col-md-8">
-          <?php include 'entete.html';?>
+          <?php include 'entete.php';?>
         </div>
         <div class="col-md-4">
         <img src="images/photo.jpeg" class="imgPos" style="width:625px;height:226px;" alt="Image">

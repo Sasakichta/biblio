@@ -59,6 +59,8 @@ $x = 0;
 ?>
 
 <?php 
+
+                                                           // Ici c'est une verif pour la redirection de page après la connexion
 if (isset($_SESSION['profil']))
               
 {
@@ -66,6 +68,20 @@ if (isset($_SESSION['profil']))
     if (($_SESSION['profil']) == 'Administrateur')
     {
         //si c'est admin alors afficher page admin
+
+
+
+
+
+
+
+        // include admin.php comme un acceuil.php et on met le formulaire de déconnexion
+
+
+
+
+
+
         echo "admin";
         
         ?>
@@ -83,7 +99,7 @@ if (isset($_SESSION['profil']))
     }
 
 
-
+    // Page membre
 
     elseif (($_SESSION['profil']) == 'Membre') 
     {
@@ -96,7 +112,7 @@ if (isset($_SESSION['profil']))
 
     <div class="row">
         <div class="col-md-8">
-          <?php include 'entete.html';?>
+          <?php include 'entete.php';?>
         </div>
         <div class="col-md-4">
         <img src="images/photo.jpeg" class="imgPos" style="width:625px;height:226px;" alt="Image">
@@ -118,47 +134,17 @@ if (isset($_SESSION['profil']))
           </div>
 
           <div class="col-md-4">
-          
-            <?php 
-
-              if (isset($_SESSION['profil']))
-              
-              {
-               // si l'utilisateur est connecté, alors afficher "bonjour @user" 
-                  if (($_SESSION['profil']) == 'Membre')
-                  {
-                      //l'afficher en tant que membre
-                      echo "membre";
-                      include 'deconnexion.php';
-                  }
-                  elseif (($_SESSION['profil']) == 'Administrateur') {
-                      //l'afficher en tant qu'admin
-                      echo "admin";
-                      include 'deconnexion.php';
-                  }
-              }
-
-              else {
-                echo "pas co";
-                echo $_SESSION['profil'];
-                include 'authentification.php';
-              }
-            
-            ?>
+            <?php include 'deconnexion.php'; ?>
           </div>
     </div>
     <div class="row"></div>
-
-
-
 </div>
-        
-
-
 
         <?php 
     }
 }
+
+//Fin de la redirection de page
 
 
 
@@ -166,11 +152,23 @@ if (isset($_SESSION['profil']))
 
 //Si user pas co (mauvais mdp ou id)
 else {
-  echo "pas co";
-  include 'authentification.php';
-}
-//Fin d'echec connexion
+  
 
+
+  // h
+
+
+              session_unset();
+                session_destroy();
+                // Redirection vers la page d'accueil après la déconnexion
+            header("Location: index.php");
+            exit();
+            //Fin d'echec connexion
+            }
+
+            
+
+//h
 
 ?>
 
