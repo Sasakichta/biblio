@@ -24,7 +24,7 @@
 
 <body>
 
-<?php 
+  <?php
 
 
 
@@ -34,7 +34,7 @@
 
 
 
-//probleme avec session 
+  //probleme avec session 
 
 
 
@@ -44,55 +44,47 @@
 
 
 
+  ?>
 
+  <div class="container-fluid">
 
-
-
-session_start();
-
-
-
-?>
-
-<div class="container-fluid">
- 
 
 
     <div class="row">
-        <div class="col-md-8">
-          <?php include 'entete.php';?>
-        </div>
-        <div class="col-md-4">
+      <div class="col-md-8">
+        <?php include 'entete.php'; ?>
+      </div>
+      <div class="col-md-4">
         <img src="images/photo.jpeg" class="imgPos" style="width:625px;height:226px;" alt="Image">
-        </div>
+      </div>
 
 
-        
+
     </div>
 
 
     <div class="row">
 
-    <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
 
-          <div class="col-md-5">
-            <div class="card;border-0"  style="width:375px;height:150px"> <!-- card pour empecher le carroussel d'être trop gros et l'afficher dans une zone determinée  /  border 0 pour enlever le border de la card -->
-              <?php include 'carroussel.php';?>
-            </div>
-          </div>
+      <div class="col-md-5">
+        <div class="card;border-0" style="width:375px;height:150px"> <!-- card pour empecher le carroussel d'être trop gros et l'afficher dans une zone determinée  /  border 0 pour enlever le border de la card -->
+          <?php include 'carroussel.php'; ?>
+        </div>
+      </div>
 
-          <div class="col-md-4">
-          
-            <?php              
-                include 'authentification.php';       
-            ?>
-          </div>
+      <div class="col-md-4">
+
+        <?php
+        include 'authentification.php';
+        ?>
+      </div>
     </div>
     <div class="row"></div>
 
 
 
-</div>
+  </div>
 
 
 
@@ -105,17 +97,17 @@ session_start();
   <?php
 
   // Commentaire sur une ligne
-  
+
   /*
   Sur Plusieurs lignes
   */
 
   // On se  connecte, voir code du fichier connexion.php ci-dessus
-  
-  
 
 
-  
+
+
+
 
   ?>
 

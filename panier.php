@@ -23,68 +23,65 @@
 
 
 <div class="container-fluid">
- 
 
 
-    <div class="row">
-        <div class="col-md-8">
-          <?php include 'entete.php';?>
-        </div>
-        <div class="col-md-4">
-        <img src="images/photo.jpeg" class="imgPos" style="width:625px;height:226px;" alt="Image">
-        </div>
 
-
-        
+  <div class="row">
+    <div class="col-md-8">
+      <?php include 'entete.php'; ?>
+    </div>
+    <div class="col-md-4">
+      <img src="images/photo.jpeg" class="imgPos" style="width:625px;height:226px;" alt="Image">
     </div>
 
 
-    <div class="row">
+
+  </div>
+
+
+  <div class="row">
 
     <div class="col-md-3"></div>
 
 
 
-          <div class="col-md-5">
-            <div class="card;border-0"  style="width:375px;height:150px"> <!-- card pour empecher le carroussel d'être trop gros et l'afficher dans une zone determinée  /  border 0 pour enlever le border de la card -->
+    <div class="col-md-5">
+      <div class="card;border-0" style="width:375px;height:150px"> <!-- card pour empecher le carroussel d'être trop gros et l'afficher dans une zone determinée  /  border 0 pour enlever le border de la card -->
 
 
-              <?php 
-              if ($_SESSION['profil'] == )
-              
-              {
-                    echo "Votre panier";
-              }
-              else {
-                    echo "Votre panier est vide car vous devez vous connecter" ;
-                    }
-              
-              ?>
+        <?php
+        if (isset($_SESSION['profil'])) {
+          echo "Votre panier";
+        } else {
+          echo "Votre panier est vide car vous devez vous connecter";
+        }
+
+        ?>
 
 
 
-            </div>
-          </div>
-
-
-
-
-          <div class="col-md-4">
-          
-
-
-            <?php              
-                include 'authentification.php';       
-            ?>
-
-
-
-
-          </div>
+      </div>
     </div>
 
 
-    <div class="row"></div>
+
+
+    <div class="col-md-4">
+
+
+
+      <?php
+      include 'authentification.php';
+      ?>
+
+
+
+
+    </div>
+  </div>
+
+
+  <div class="row"></div>
 
 
 
