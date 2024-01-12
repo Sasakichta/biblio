@@ -34,6 +34,7 @@ if (!isset($_POST['connexion']) and !isset($_SESSION['profil']) ) { //on affiche
 
 
 if (isset($_POST['connexion'])) {
+
     require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
 
 
@@ -59,16 +60,15 @@ if (isset($_POST['connexion'])) {
         $_SESSION["codepostal"] = $enregistrement->codepostal;
         $_SESSION["ville"] = $enregistrement->ville;
     }
-
+    if (!isset($_REQUEST["recherche"])) {
+        echo '<meta http-equiv="refresh" content="0" />';
+        }
+ 
 }
 
 if (isset($_SESSION['profil']) ) {
 
-    //if sesion admin alors redirection page admin
-
-
     ?>
-
 
     <div class="container pt-5">
         <div class="d-flex justify-content-center">

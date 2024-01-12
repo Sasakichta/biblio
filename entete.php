@@ -14,6 +14,10 @@ session_start();
   <br>
   <br>
 
+  <?php
+  if (!isset($_SESSION['profil']) or $_SESSION['profil'] == 'Membre' ) {
+  ?>
+
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark rounded">
       <div class="container-fluid rounded">
           <form class="d-flex w-100" method="post" action="Affichagerecherche.php">
@@ -22,4 +26,34 @@ session_start();
              <a href="panier.php" class="btn btn-primary">Panier</a>
       </div>
   </nav>
+
+
+
+
+  <?php } 
+  else if ($_SESSION['profil'] == 'Administrateur') {
+    ?>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark rounded">
+  <div class="container-fluid rounded">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.php?option=membre">Créer un membre</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="index.php?option=livre">Ajouter un livre</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<?php } ?>
+
+
 </div>
+
+
+
+ 
+
+

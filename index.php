@@ -69,7 +69,14 @@
 
       <div class="col-md-5">
         <div class="card;border-0" style="width:375px;height:150px"> <!-- card pour empecher le carroussel d'être trop gros et l'afficher dans une zone determinée  /  border 0 pour enlever le border de la card -->
-          <?php include 'carroussel.php'; ?>
+          <?php 
+          if (!isset($_SESSION['profil']) or $_SESSION['profil'] == 'Membre') {
+          include 'carroussel.php'; 
+          }
+          else if ($_SESSION['profil'] == 'Administrateur') {
+          include 'menu_admin.php';
+          }
+          ?>
         </div>
       </div>
 
