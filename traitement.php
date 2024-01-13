@@ -113,9 +113,6 @@ Sur Plusieurs lignes
           <div class="col-md-4">
             <img src="images/photo.jpeg" class="imgPos" style="width:625px;height:226px;" alt="Image">
           </div>
-
-
-
         </div>
 
 
