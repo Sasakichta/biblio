@@ -31,7 +31,20 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
                             <h2 class="text-center mb-4">Ajouter un livre</h2>
                             <div class="mb-3">
                                 <label for="nom" class="form-label">Auteur</label>
-                                <input type="text" class="form-control" id="auteur" name="auteur" placeholder="Saisissez votre e@mail">
+                                
+                                <?php
+
+                                    $select = $connexion->prepare("SELECT * FROM auteur");
+                                    $select->setFetchMode(PDO::FETCH_OBJ);
+                                    $select->execute();
+
+                                echo "<select name=auteur>";
+                                while ($enregistrement = $select->fetch())
+                                {
+                                  echo "<option value=$enregistrement->nom> $enregistrement->nom <option>";
+                                }
+                                echo "</select>";
+                                ?>
                             </div>
                             <div class="mb-3">
                                 <label for="prenom" class="form-label">Titre</label>
@@ -77,8 +90,10 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
     $select->execute();
 
     while ($enregistrement = $select->fetch()) {
+        echo "a";
         $dernier_nolivre = $enregistrement->nolivre;
     }
+    $numero_livre = $dernier_nolivre + 1;
     //Fin de recherche de nolivre
 
 
@@ -104,7 +119,18 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
 
     //On ajoute le livre
     $select = $connexion->prepare('INSERT INTO livre (`nolivre`, `noauteur`, `titre`, `isbn13`, `anneeparution`, `resume`, `dateajout`, `image`) 
-    VALUES ($dernier_nolivre + 1, $noAuteur, $_REQUEST["titre"], $_REQUEST["ISBN13"], $_REQUEST["annee_parution"], $_REQUEST["resume"], $date_jour, $_REQUEST["image"])');
+    VALUES (:numero_livre, :auteur, :titre, :ISBN13, :annee_parution, :resumé, :dateajout, :imageurl)');
+
+    $select->bindParam(':numero_livre', $numero_livre);
+    $select->bindParam(':auteur', $_REQUEST["auteur"]);
+    $select->bindParam(':titre', $_REQUEST["titre"]);
+    $select->bindParam(':ISBN13', $_REQUEST["ISBN13"]);
+    $select->bindParam(':annee_parution', $_REQUEST["annee_parution"]);
+    $select->bindParam(':resumé', $_REQUEST["resume"]);
+    $select->bindParam(':dateajout', $date_jour);
+    $select->bindParam(':imageurl', $_REQUEST["image"]);
+
+    $select->execute();
     //Fin de l'ajout
     
     }
