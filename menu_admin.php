@@ -48,23 +48,23 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
                             </div>
                             <div class="mb-3">
                                 <label for="prenom" class="form-label">Titre</label>
-                                <input type="password" class="form-control" id="titre" name="titre">
+                                <input type="text" class="form-control" id="titre" name="titre">
                             </div>
                             <div class="mb-3">
                                 <label for="prenom" class="form-label">ISBN13</label>
-                                <input type="password" class="form-control" id="ISBN13" name="ISBN13">
+                                <input type="text" class="form-control" id="ISBN13" name="ISBN13">
                             </div>
                             <div class="mb-3">
                                 <label for="prenom" class="form-label">Année de parution</label>
-                                <input type="password" class="form-control" id="annee_parution" name="annee_parution">
+                                <input type="text" class="form-control" id="annee_parution" name="annee_parution">
                             </div>
                             <div class="mb-3">
                                 <label for="prenom" class="form-label">Résumé</label>
-                                <input type="password" class="form-control" id="resume" name="resume">
+                                <input type="text" class="form-control" id="resume" name="resume">
                             </div>
                             <div class="mb-3">
                                 <label for="prenom" class="form-label">Image</label>
-                                <input type="password" class="form-control" id="image" name="image">
+                                <input type="text" class="form-control" id="image" name="image">
                             </div>
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary" type="submit" name="ajouter">Ajouter</button>
@@ -84,20 +84,10 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
 
     if (isset($_POST['ajouter'])) { //on execute que si le membre a cliqué sur "envoyer"
 
-    //Trouver le dernier numéro de livre pour incrémentation automatique
-    $select = $connexion->prepare("SELECT MAX(nolivre) FROM livre");
-    $select->setFetchMode(PDO::FETCH_OBJ);
-    $select->execute();
-
-    while ($enregistrement = $select->fetch()) {
-        echo "a";
-        $dernier_nolivre = $enregistrement->nolivre;
-    }
-    $numero_livre = $dernier_nolivre + 1;
-    //Fin de recherche de nolivre
+    
 
 
-
+        echo $_REQUEST["auteur"];
     //Recherche du numéro d'auteur via le nom donné
     $select = $connexion->prepare("SELECT noauteur FROM auteur where nom=:nomAuteur");
     $select->bindValue(":nomAuteur", $_REQUEST["auteur"]);
@@ -106,6 +96,7 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
 
     while ($enregistrement = $select->fetch()) {
         $noAuteur = $enregistrement->noauteur;
+        
     }
     //Fin de recherche de noauteur
 
@@ -118,15 +109,15 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
 
 
     //On ajoute le livre
-    $select = $connexion->prepare('INSERT INTO livre (`nolivre`, `noauteur`, `titre`, `isbn13`, `anneeparution`, `resume`, `dateajout`, `image`) 
-    VALUES (:numero_livre, :auteur, :titre, :ISBN13, :annee_parution, :resumé, :dateajout, :imageurl)');
+    $select = $connexion->prepare('INSERT INTO livre (`noauteur`, `titre`, `isbn13`, `anneeparution`, `resume`, `dateajout`, `image`) 
+    VALUES (:auteur, :titre, :ISBN13, :annee_parution, :resume, :dateajout, :imageurl)');
 
-    $select->bindParam(':numero_livre', $numero_livre);
-    $select->bindParam(':auteur', $_REQUEST["auteur"]);
+    //$select->bindParam(':numero_livre', $numero_livre);
+    $select->bindParam(':auteur', $noAuteur);
     $select->bindParam(':titre', $_REQUEST["titre"]);
     $select->bindParam(':ISBN13', $_REQUEST["ISBN13"]);
     $select->bindParam(':annee_parution', $_REQUEST["annee_parution"]);
-    $select->bindParam(':resumé', $_REQUEST["resume"]);
+    $select->bindParam(':resume', $_REQUEST["resume"]);
     $select->bindParam(':dateajout', $date_jour);
     $select->bindParam(':imageurl', $_REQUEST["image"]);
 
