@@ -158,32 +158,32 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
                         <form name="connexion" method="post">
                             <h2 class="text-center mb-4">Créer un membre</h2>
                             <div class="mb-3">
-                                <label for="nom" class="form-label">Mail</label>
+                                <label for="Mail" class="form-label">Mail</label>
                                 <input type="text" class="form-control" id="mail" name="mail" placeholder="Saisissez votre e@mail">
                             </div>
                             <div class="mb-3">
-                                <label for="prenom" class="form-label">Mot de passe</label>
+                                <label for="Mot de passe" class="form-label">Mot de passe</label>
                                 <input type="password" class="form-control" id="mdp" name="mdp">
                             </div>
                             <div class="mb-3">
-                                <label for="prenom" class="form-label">Nom</label>
-                                <input type="password" class="form-control" id="nom" name="nom">
+                                <label for="Nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nom" name="nom">
                             </div>
                             <div class="mb-3">
                                 <label for="prenom" class="form-label">Prénom</label>
-                                <input type="password" class="form-control" id="prenom" name="prenom">
+                                <input type="text" class="form-control" id="prenom" name="prenom">
                             </div>
                             <div class="mb-3">
-                                <label for="prenom" class="form-label">Adresse</label>
-                                <input type="password" class="form-control" id="adresse" name="adresse">
+                                <label for="Adresse" class="form-label">Adresse</label>
+                                <input type="text" class="form-control" id="adresse" name="adresse">
                             </div>
                             <div class="mb-3">
-                                <label for="prenom" class="form-label">Ville</label>
-                                <input type="password" class="form-control" id="ville" name="ville">
+                                <label for="Ville" class="form-label">Ville</label>
+                                <input type="text" class="form-control" id="ville" name="ville">
                             </div>
                             <div class="mb-3">
-                                <label for="prenom" class="form-label">Code Postal</label>
-                                <input type="password" class="form-control" id="cp" name="cp">
+                                <label for="CodePostal" class="form-label">Code Postal</label>
+                                <input type="text" class="form-control" id="cp" name="cp">
                             </div>
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary" type="submit" name="creer">Créer un membre</button>

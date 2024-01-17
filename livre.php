@@ -57,6 +57,61 @@
 Sur Plusieurs lignes
 */
 
+$msg = " ";
+
+if (isset($_SESSION['profil'])) {
+    $msg = '<form name="ajout_panier" method="post"> <button class="btn btn-primary" type="submit" name="ajout_panier"> Ajouter au panier</button> </form>';
+}
+else {
+    $msg = "Vous devez vous connecter pour pouvoir réserver";
+}
+
+echo "<h1> Disponible </h1>"."<br>".$msg; 
+echo "<br>";
+echo "<br>";
+
+if (isset($_POST['ajout_panier'])) {
+  if (!isset($_SESSION['livres']) ) {
+    $_SESSION['livres'] = array("vide", "vide", "vide", "vide", "vide"); //possibilité de reserver 5 livres max | Les id des livres réservés sont inscrits ici
+  }
+  
+  if (!isset($_SESSION['emprunts'])) { //pour ajouter le nombre d'emprunts plus tard, on dois créer une variable emprunt pour définir sa valeur ensuite
+    $_SESSION['emprunts'] = 0;
+    }
+
+    //additioner le nombre de livre emprunté dans le panier que ce sois validé ou non
+    require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
+    $select = $connexion->prepare("SELECT * FROM emprunter");
+    $select->setFetchMode(PDO::FETCH_OBJ);
+    $select->execute();
+  while ($enregistrement = $select->fetch()){
+        if ($enregistrement->mel == $_SESSION['mail']) {
+          $_SESSION['emprunts'] ++;
+        }
+  }
+
+    if ($_SESSION['emprunts'] == 5) {          //le nombre d'emprunt étant de 5 max
+      echo "<h1>Vous ne pouvez pas ajouter plus</h1><br>";
+    }
+
+    else {
+      $emprunts = $_SESSION['emprunts'];
+      $livre = $_GET['idLivre'];
+      $livres = $_SESSION['livres'];
+
+      if(isset($_SESSION['panier'])) {
+        $emprunts = $_SESSION['panier'][0]; // Récupérer la valeur actuelle pour éviter de revenir à 0
+      }
+      if(isset($_SESSION['panier'])) {
+        $livres = $_SESSION['panier'][1]; // Récupérer la valeur actuelle pour éviter de revenir à 0
+      }
+
+      $_SESSION['panier'] = array($emprunts, $livres); //nombre d'emprunt, le livre emprunté,
+      $_SESSION['panier'][0] ++;
+      $_SESSION['panier'][1][$emprunts] = $livre;     //Le énième livre emprunté par le membre = livre choisi
+    }
+}
+
 
 
 
