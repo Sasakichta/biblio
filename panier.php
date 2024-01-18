@@ -89,8 +89,8 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
             }
             $x++; 
 
-            if($x == 5) {break;}       
-        } while ($_SESSION['panier'][1][$x] != 'vide' and $x < $_SESSION['panier'][0]);
+            if($x == count($_SESSION['panier'][1])) {break;}       
+        } while ($_SESSION['panier'][1][$x] != 'vide' and $x < count($_SESSION['panier'][1]));
 
         echo "<br><br>";
         echo "Attention : vous déconnecter videra votre panier.";

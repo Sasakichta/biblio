@@ -68,28 +68,26 @@ else {
 
 
 if (isset($_SESSION['panier'])){
-for($x = 0; $x < 5; $x++) {
+for($x = 0; $x < count($_SESSION['panier'][1]); $x++) {
   if ($_SESSION['panier'][1][$x] == $_GET['idLivre']) {
       $msg =  "Vous avez déja emprunté ce livre !";
   }
 }
 }
+
+
 echo "<h1> Disponible </h1>"."<br>".$msg; 
 echo "<br>";
 echo "<br>";
 
+
+if(!isset($_SESSION['panier'])) {
+  $livres = array();
+  $_SESSION['panier'] = array(0, $livres); //nombre d'emprunt, les livres empruntés,
+}
+
+
 if (isset($_POST['ajout_panier'])) {
-
-
-  if (!isset($_SESSION['livres']) ) { //MISE EN VARIABLE DE SESSION POUR RECUPERER LES VALEURS SI ON QUITTE LA PAGE.
-
-    $_SESSION['livres'] = array("vide", "vide", "vide", "vide", "vide"); //possibilité de reserver 5 livres max | Les id des livres réservés sont inscrits ici
-    
-  }
-  
-  if (!isset($_SESSION['emprunts'])) { //pour ajouter le nombre d'emprunts plus tard, on dois créer une variable emprunt pour définir sa valeur ensuite
-    $_SESSION['emprunts'] = 0;
-    }
 
     //additioner le nombre de livre emprunté dans le panier que ce sois validé ou non
     require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
@@ -98,7 +96,7 @@ if (isset($_POST['ajout_panier'])) {
     $select->execute();
   while ($enregistrement = $select->fetch()){
         if ($enregistrement->mel == $_SESSION['mail']) {
-          $_SESSION['emprunts'] ++;
+          $_SESSION['panier'][0] ++;
         }
   }
 
@@ -107,23 +105,11 @@ if (isset($_POST['ajout_panier'])) {
     }
 
     else {
-      $emprunts = $_SESSION['emprunts'];
       $livre = $_GET['idLivre'];
-      $livres = $_SESSION['livres'];
-
-      if(isset($_SESSION['panier'])) {
-        $emprunts = $_SESSION['panier'][0]; // Récupérer la valeur actuelle pour éviter de revenir à 0
-      }
-      if(isset($_SESSION['panier'])) {
-        $livres = $_SESSION['panier'][1]; // Récupérer la valeur actuelle pour éviter de revenir à 0
-      }
-
-
-      $_SESSION['panier'] = array($emprunts, $livres); //nombre d'emprunt, le livre emprunté,
 
         //On ajoute le livre uniquement s'il ne l'a pas déja prit
         $ajout_possible = true;
-        for($x = 0; $x < 5; $x++) {
+        for($x = 0; $x < count($_SESSION['panier'][1]); $x++) {
           if ($_SESSION['panier'][1][$x] == $_GET['idLivre']) {
               $ajout_possible = false;
           }
@@ -132,7 +118,8 @@ if (isset($_POST['ajout_panier'])) {
 
       if ($ajout_possible == true) {
       //$_SESSION['panier'][0] ++;
-      $_SESSION['panier'][1][$emprunts] = $livre;     //Le énième livre emprunté par le membre = livre choisi
+      array_push($_SESSION['panier'][1], $livre);
+      //$_SESSION['panier'][1]. = $livre;     //Le énième livre emprunté par le membre = livre choisi
       $_SESSION['panier'][0] ++;
       }
     }
