@@ -58,14 +58,10 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
 
 
 
-        if (isset($_SESSION['profil'])) {
+        if (isset($_SESSION['profil']) or isset($_SESSION['panier'][1][0])) {
           echo "<h1>Votre panier</h1>";
-          if(!isset($_SESSION['panier'])) {
-            echo "<br>";
-            echo "<br>";
-            echo "Votre panier est vide !";
-          }
-          else {
+
+           if (isset($_SESSION['panier'][1][0])){
           echo "<br>";
           echo "Nombre de livre emprunté : ".$_SESSION['panier'][0];
           echo "<br>";
@@ -89,41 +85,59 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
             }
             $x++; 
 
-            if($x == count($_SESSION['panier'][1])) {break;}       
-        } while ($_SESSION['panier'][1][$x] != 'vide' and $x < count($_SESSION['panier'][1]));
+            if($x == count($_SESSION['panier'][1])) {break;} 
+          } while (isset($_SESSION['panier'][1][$x]));      
+        //} while ($x < count($_SESSION['panier'][1]));
 
         echo "<br><br>";
         echo "Attention : vous déconnecter videra votre panier.";
         echo '<form name="valider_panier" method="post"> <button class="btn btn-primary" type="submit" name="valider_panier"> Valider le panier</button> </form>';
       
+      } 
+      else {
+            echo "<br>";
+            echo "<br>";
+            echo "Votre panier est vide !";
       }
+
 
 
       if (isset($_POST['valider_panier'])) {
           
 
-
-          //$select = $connexion->prepare('INSERT INTO livre (`mel`, `nolivre`, `dateemprunt`, `dateretour`) 
-          //VALUES (:auteur, :titre, :ISBN13, :annee_parution)');
+        for($x = 0; $x < count($_SESSION['panier'][1]); $x++) {
+          $date = date("y-m-j");
+          $select = $connexion->prepare('INSERT INTO livre (`mel`, `nolivre`, `dateemprunt`, `dateretour`) 
+          VALUES (:auteur, :titre, :ISBN13, :annee_parution)');
       
-          //$select->bindParam(':mel', $_SESSION['mail']);
-          //$select->bindParam(':nolivre', $_GET['idLivre']);
-          //$select->bindParam(':date_emprunt', date("y-m-j"));
-          //$select->bindParam(':date_retour', $_REQUEST["annee_parution"]);
-      
-          //$select->execute();
+          $select->bindParam(':mel', $_SESSION['mail']);
+          $select->bindParam(':nolivre', $_SESSION['panier'][1][$x]);
+          $select->bindParam(':date_emprunt', $date);
+          echo $date;
+          strtotime('+1 day', $date);
+          echo $date;
+          $select->bindParam(':date_retour', $date);
+          $select->execute();
+        }
 
-          //unset($_SESSION["panier"]);
-          //echo '<meta http-equiv="refresh" content="0" />';
-          //echo "Votre panier à bien été validé !";
+          unset($_SESSION["panier"]);
+          echo '<meta http-equiv="refresh" content="0" />';
+          echo "Votre panier à bien été validé !";
       }
 
 
       if (isset($_GET['supprimer'])) {
-        $_SESSION['panier'][0]--;
+        
+        if ($_SESSION['panier'][0] > 0) {
+          $_SESSION['panier'][0]--;
+        }
         $livre = $_GET['supprimer'];
-        $_SESSION["panier"][1][$livre] = 'vide';
-        echo '<meta http-equiv="refresh" content="0/panier.php" />';
+        //$_SESSION["panier"][1][$livre] = 'vide';
+        unset($_SESSION["panier"][1][$_GET['supprimer']]);
+        //$_SESSION["panier"][1] = array_values($_SESSION["panier"][1]); // Réorganiser les clés numériques
+
+      
+      
       }
 
 
