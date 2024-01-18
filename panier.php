@@ -84,13 +84,22 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
 
             while ($enregistrement = $select->fetch()){
               echo $enregistrement->prenom." ".$enregistrement->nom." - ".$enregistrement->titre;
+              echo "<a href='panier.php?supprimer=".$x."'>"." Supprimer"."</a>";
               echo "<br>";
             }
-            $x++;        
-        } while ($_SESSION['panier'][1][$x] != 'vide'); // Attention : while = Tant que…
+            $x++; 
+
+            if($x == 5) {break;}       
+        } while ($_SESSION['panier'][1][$x] != 'vide' and $x < $_SESSION['panier'][0]);
+
+        echo "<br><br>";
+        echo "Attention : vous déconnecter videra votre panier.";
+        echo '<form name="valider_panier" method="post"> <button class="btn btn-primary" type="submit" name="valider_panier"> Valider le panier</button> </form>';
       
       }
 
+
+      if (isset($_POST['valider_panier'])) {
           
 
 
@@ -103,6 +112,21 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
           //$select->bindParam(':date_retour', $_REQUEST["annee_parution"]);
       
           //$select->execute();
+
+          //unset($_SESSION["panier"]);
+          //echo '<meta http-equiv="refresh" content="0" />';
+          //echo "Votre panier à bien été validé !";
+      }
+
+
+      if (isset($_GET['supprimer'])) {
+        $_SESSION['panier'][0]--;
+        $livre = $_GET['supprimer'];
+        $_SESSION["panier"][1][$livre] = 'vide';
+        echo '<meta http-equiv="refresh" content="0/panier.php" />';
+      }
+
+
 
 
         } else {

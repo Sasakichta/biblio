@@ -66,13 +66,25 @@ else {
     $msg = "Vous devez vous connecter pour pouvoir réserver";
 }
 
+
+if (isset($_SESSION['panier'])){
+for($x = 0; $x < 5; $x++) {
+  if ($_SESSION['panier'][1][$x] == $_GET['idLivre']) {
+      $msg =  "Vous avez déja emprunté ce livre !";
+  }
+}
+}
 echo "<h1> Disponible </h1>"."<br>".$msg; 
 echo "<br>";
 echo "<br>";
 
 if (isset($_POST['ajout_panier'])) {
-  if (!isset($_SESSION['livres']) ) {
+
+
+  if (!isset($_SESSION['livres']) ) { //MISE EN VARIABLE DE SESSION POUR RECUPERER LES VALEURS SI ON QUITTE LA PAGE.
+
     $_SESSION['livres'] = array("vide", "vide", "vide", "vide", "vide"); //possibilité de reserver 5 livres max | Les id des livres réservés sont inscrits ici
+    
   }
   
   if (!isset($_SESSION['emprunts'])) { //pour ajouter le nombre d'emprunts plus tard, on dois créer une variable emprunt pour définir sa valeur ensuite
@@ -90,7 +102,7 @@ if (isset($_POST['ajout_panier'])) {
         }
   }
 
-    if ($_SESSION['emprunts'] == 5) {          //le nombre d'emprunt étant de 5 max
+    if (isset($_SESSION['panier']) and $_SESSION['panier'][0] == 5) {          //le nombre d'emprunt étant de 5 max
       echo "<h1>Vous ne pouvez pas ajouter plus</h1><br>";
     }
 
@@ -106,9 +118,23 @@ if (isset($_POST['ajout_panier'])) {
         $livres = $_SESSION['panier'][1]; // Récupérer la valeur actuelle pour éviter de revenir à 0
       }
 
+
       $_SESSION['panier'] = array($emprunts, $livres); //nombre d'emprunt, le livre emprunté,
-      $_SESSION['panier'][0] ++;
+
+        //On ajoute le livre uniquement s'il ne l'a pas déja prit
+        $ajout_possible = true;
+        for($x = 0; $x < 5; $x++) {
+          if ($_SESSION['panier'][1][$x] == $_GET['idLivre']) {
+              $ajout_possible = false;
+          }
+        }
+        //Fin d'ajout de livre
+
+      if ($ajout_possible == true) {
+      //$_SESSION['panier'][0] ++;
       $_SESSION['panier'][1][$emprunts] = $livre;     //Le énième livre emprunté par le membre = livre choisi
+      $_SESSION['panier'][0] ++;
+      }
     }
 }
 
