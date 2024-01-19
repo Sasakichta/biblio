@@ -107,16 +107,14 @@ require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une 
 
         for($x = 0; $x < count($_SESSION['panier'][1]); $x++) {
           $date = date("y-m-j");
-          $select = $connexion->prepare('INSERT INTO livre (`mel`, `nolivre`, `dateemprunt`, `dateretour`) 
-          VALUES (:auteur, :titre, :ISBN13, :annee_parution)');
+          $date_retour = date('y-m-j', strtotime('+1 day'));
+          $select = $connexion->prepare('INSERT INTO emprunter (`mel`, `nolivre`, `dateemprunt`, `dateretour`) 
+          VALUES (:mel, :nolivre, :date_emprunt, :date_retour)');
       
           $select->bindParam(':mel', $_SESSION['mail']);
           $select->bindParam(':nolivre', $_SESSION['panier'][1][$x]);
           $select->bindParam(':date_emprunt', $date);
-          echo $date;
-          strtotime('+1 day', $date);
-          echo $date;
-          $select->bindParam(':date_retour', $date);
+          $select->bindParam(':date_retour', $date_retour);
           $select->execute();
         }
 

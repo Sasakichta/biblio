@@ -20,8 +20,9 @@
 
 
 <body>
-
-
+  <?php
+require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
+?>
 
 
 
@@ -67,6 +68,7 @@ else {
 }
 
 
+
 if (isset($_SESSION['panier'])){
 for($x = 0; $x < count($_SESSION['panier'][1]); $x++) {
   if ($_SESSION['panier'][1][$x] == $_GET['idLivre']) {
@@ -75,8 +77,22 @@ for($x = 0; $x < count($_SESSION['panier'][1]); $x++) {
 }
 }
 
+$dispo_msg = "Disponible";
+    $select = $connexion->prepare("SELECT * FROM emprunter");
+    $select->setFetchMode(PDO::FETCH_OBJ);
+    $select->execute();
+  while ($enregistrement = $select->fetch()){
+        if ($enregistrement->nolivre == $_GET['idLivre']) {
+          $dispo_msg = "Non disponible";
+          break;
+        }
+  }
 
-echo "<h1> Disponible </h1>"."<br>".$msg; 
+  if($dispo_msg == "Non disponible") {
+    echo "<h1> ".$dispo_msg." </h1>"; 
+  } else {
+    echo "<h1> Disponible </h1>"."<br>".$msg; 
+  }
 echo "<br>";
 echo "<br>";
 
@@ -90,7 +106,6 @@ if(!isset($_SESSION['panier'])) {
 if (isset($_POST['ajout_panier'])) {
 
     //additioner le nombre de livre emprunté dans le panier que ce sois validé ou non
-    require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
     $select = $connexion->prepare("SELECT * FROM emprunter");
     $select->setFetchMode(PDO::FETCH_OBJ);
     $select->execute();

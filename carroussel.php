@@ -1,16 +1,13 @@
 <?php 
 require_once('connexion.php'); // once : le fichier ne peut être inclus qu'une fois
 
+$select = $connexion->prepare("SELECT image FROM livre ORDER BY dateajout desc"); //On selectionne les images de la bdd dans l'ordre décroissant (2 derniers ajout)
+$select->setFetchMode(PDO::FETCH_OBJ);
+$select->execute();
 
-$select = $connexion->prepare("SELECT image FROM livre ORDER BY dateajout desc");
 
- // $select->bindValue(":codeActivite", $codeActivite);
-
-  $select->setFetchMode(PDO::FETCH_OBJ);
-  $select->execute();
-
+//On defini les images des 2 derniers ajouts dans des variables qu'on affiche ensuite dans le carroussel
 $compteur=0;
-
  while ($enregistrement = $select->fetch()){
   if ($compteur==0) {
     $Image=$enregistrement->image;
@@ -33,26 +30,26 @@ echo ('<div class="container-fluid mt-3">
     <br>
 </div>');
 
+
 echo '<div id="demo" class="carousel slide" data-bs-ride="carousel">';
 
-  // Indicators/dots
+  // Les boutons indicateurs du carroussel
  echo ('<div class="carousel-indicators">
     <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
     <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
   </div>');
   
-  //The slideshow/carousel
-
+  //Les images du carroussel
   echo '<div class="carousel-inner">
     <div class="carousel-item active">
-      <img src='.$Image.' alt="Los Angeles" class="d-block" style="width:100%">
+      <img src='.$Image.' alt="image" class="d-block" style="width:100%">
     </div>';
     echo '<div class="carousel-item">
-      <img src='.$Image2.' alt="Chicago" class="d-block" style="width:100%">
+      <img src='.$Image2.' alt="image" class="d-block" style="width:100%">
     </div>
   </div>';
   
-  // Left and right controls/icons
+  //Les flèches de control du carroussel
   echo ('<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </button>
@@ -61,4 +58,7 @@ echo '<div id="demo" class="carousel slide" data-bs-ride="carousel">';
   </button>
 </div>');
 
-?>
+
+
+// mit en commentaire car jugé inutile par vs code
+// mais contenant la balise fermante de php
